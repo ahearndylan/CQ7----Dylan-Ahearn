@@ -1,0 +1,27 @@
+// Write your code here
+        return lcsHelper(a, b, 0, 0);
+    }
+         private static List<Integer> lcsHelper(List<Integer> a, List<Integer> b, int i, int j) {
+        if (i == a.size() || j == b.size()) {
+            return new ArrayList<>(); // Return an empty list
+        }
+        
+        if (a.get(i).equals(b.get(j))) {
+
+            List<Integer> restOfLCS = lcsHelper(a, b, i + 1, j + 1);
+            ArrayList<Integer> lcs = new ArrayList<>();
+            lcs.add(a.get(i));
+            lcs.addAll(restOfLCS);
+            return lcs;
+        } else {
+            List<Integer> skipA = lcsHelper(a, b, i + 1, j);
+            List<Integer> skipB = lcsHelper(a, b, i, j + 1);
+            
+            if (skipA.size() > skipB.size()) {
+                return skipA;
+            } else {
+                return skipB;
+            }
+        }
+    }
+}

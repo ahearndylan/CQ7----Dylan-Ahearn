@@ -1,0 +1,18 @@
+// Write your code here
+        return getWaysRecursive(n, c, 0);
+    }
+
+    private static long getWaysRecursive(int amount, List<Long> c, int index) {
+        if (amount == 0) {
+            return 1;
+        }
+        if (amount < 0 || index == c.size()) {
+            return 0;
+        }
+
+        long include = getWaysRecursive(amount - c.get(index).intValue(), c, index);
+        long exclude = getWaysRecursive(amount, c, index + 1);
+
+        return include + exclude;
+    }
+}
